@@ -558,3 +558,4 @@ ui-studio/workspace/settings.json
 # Regenerable experimental previews.
 /build/experimental/
 /art/upstream-hd-assets-v3/.art-cache/
+/build/experimental-pass3/

@@ -386,14 +386,6 @@ main:has(> .rest-screen) > .shared-hud .hud-vitals-panel { max-width:28rem; padd
 :root .combat[data-layout='formation'] > .hand-area { grid-template-rows:minmax(0,1fr) 5.5rem; margin:0; padding:0; }
 :root .combat[data-layout='formation'] .environment-backdrop::before { background:linear-gradient(180deg,#08070610 25%,transparent 55%,#080706a0 100%); }
 :root .combat[data-layout='formation'] .combatant .sprite { --combatant-edge:drop-shadow(0 2px 2px #100b08a0); }
-:root .combat[data-layout='formation'] > .hand-area > .combat-action-row {
- grid-template-columns:5rem 7rem minmax(0,1fr) 8rem 5rem 14rem; gap:.8rem; padding:.6rem 2rem;
-}
-:root .combat[data-layout='formation'] .combat-action-row > .end-turn { grid-column:6; width:100%; }
-:root .combat[data-layout='formation'] .combat-action-row > .spent { grid-column:4; }
-:root .combat[data-layout='formation'] .combat-action-row > .combat-potions { grid-column:5; }
-:root .combat[data-layout='formation'] .combat-action-row > .draw { grid-column:2; }
-:root .combat[data-layout='formation'] .combat-action-row > .energy-orb { grid-column:1; }
 .combat .turn-ribbon { top:3%; background:#16120bbc; }
 
 /* Merchant drawers expand in place. Mobile uses the same categories in one select. */
@@ -415,7 +407,6 @@ main:has(> .rest-screen) > .shared-hud .hud-vitals-panel { max-width:28rem; padd
 :root[data-layout='narrow'] .title-screen .title-traveler { width:36%; height:32%; left:1%; top:5%; bottom:auto; }
 :root[data-layout='narrow'] .title-screen .title-menu > li:nth-child(n+3) { width:88%; }
 :root[data-layout='narrow'] :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) > .shared-hud > .hud-top { grid-template-columns:14rem 1fr auto; }
-:root[data-layout='narrow'] .combat[data-layout='formation'] > .hand-area > .combat-action-row { grid-template-columns:4rem 4.5rem minmax(0,1fr) 5rem 4rem 8rem; gap:.35rem; padding:.5rem; }
 :root[data-layout='narrow'] .shop-workspace:not(.master-workspace) { padding:30vh 1rem 1rem; }
 :root[data-layout='narrow'] .shop-workspace:not(.master-workspace) .shop-frame { width:100%; }
 :root[data-layout='narrow'] .shop-workspace:not(.master-workspace) .shop-railitem { display:none; }
@@ -435,16 +426,7 @@ body.reduced-motion .shop-workspace .shop-pane { animation:none; }
 :root .shop-workspace .shop-collectible-offer :is(.epc-facts,.epc-effects,.epc-tags,.epc-flavor,.epc-footer,.card-info-button,.card-more-button) { display:none; }
 :root .shop-workspace .shop-collectible-offer > .cp-body { margin-top:.2rem; }
 :root .combat[data-layout='formation'] { grid-template-rows:0 minmax(0,1fr) 35% 0; }
-:root .combat[data-layout='formation'] > .hand-area { grid-template-rows:minmax(0,1fr) 4.8rem; }
-:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] {
- grid-template-columns:4.5rem 6rem minmax(0,1fr) 7rem 4.5rem 13rem; gap:.7rem; padding:.4rem 2rem;
-}
-:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .end-turn { grid-column:6; }
-:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .spent { grid-column:4; width:100%; }
-:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .combat-potions { grid-column:5; }
-:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .draw { grid-column:2; width:100%; }
-:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .energy-orb { grid-column:1; }
-:root[data-layout='narrow'] .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] { grid-template-columns:4rem 4rem minmax(0,1fr) 5rem 4rem 8rem; gap:.3rem; padding:.4rem; }
+:root .combat[data-layout='formation'] > .hand-area { grid-template-rows:minmax(0,1fr) calc(64px / var(--ui-zoom,1)); }
 .title-screen .title-landscape { position:absolute; inset:-1%; z-index:0; background:inherit; pointer-events:none; }
 .title-screen .title-traveler { z-index:1; }
 .title-screen .as-titlemenu { position:relative; z-index:2; }
@@ -457,12 +439,6 @@ body.reduced-motion .shop-workspace .shop-pane { animation:none; }
 :root[data-layout='narrow'] .title-screen .as-titlemenu > .as-ornament:first-child { display:none; }
 :root[data-layout='narrow'] .title-screen .title-traveler { top:17%; height:28%; }
 :root .combat[data-layout='formation']:is(.coop,:not(.coop)) .hand { overflow:visible; scrollbar-width:none; }
-:root[data-layout='narrow'] .combat[data-layout='formation'] > .hand-area { grid-template-rows:minmax(0,1fr) calc(62px / var(--ui-zoom,1)); }
-:root[data-layout='narrow'] .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] {
- --combat-control-size:calc(44px / var(--ui-zoom,1)) !important;
- grid-template-columns:calc(44px / var(--ui-zoom,1)) calc(44px / var(--ui-zoom,1)) minmax(0,1fr) calc(58px / var(--ui-zoom,1)) calc(44px / var(--ui-zoom,1)) calc(82px / var(--ui-zoom,1));
- grid-template-rows:minmax(0,1fr); gap:calc(4px / var(--ui-zoom,1)); padding:calc(4px / var(--ui-zoom,1));
-}
 :root[data-layout='narrow'] .combat .turn-ribbon { top:25%; font-size:1.2rem; }
 :root[data-layout='narrow'] .combat .combatant-leading .intent { font-size:calc(18px / var(--ui-zoom,1)) !important; min-width:calc(56px / var(--ui-zoom,1)); }
 :root[data-layout='narrow'] .combat .combatant-leading .intent .as-glyph { display:none; }
@@ -474,3 +450,25 @@ body.reduced-motion .shop-workspace .shop-pane { animation:none; }
 :root[data-layout='narrow'] .rest-screen.choice-screen .rest-door { flex-basis:60%; max-height:60%; }
 :root[data-composition='short-wide'] .rest-screen.choice-screen { padding:2rem 1rem 1rem; }
 :root[data-composition='short-wide'] .rest-screen.choice-screen .rest-door { flex-basis:88%; max-height:88%; }
+
+/* The chapel's foreground and recovery ledger share the live rest plan. */
+.rest-screen .polish-scene-painting > img:first-child { width:100%; height:100%; object-fit:cover; }
+.rest-screen .polish-scene-painting > .rest-traveler-foreground {
+ position:absolute; left:6%; bottom:39%; width:49%; height:46%; object-fit:contain; object-position:center bottom;
+ animation:playerSceneReveal 700ms ease-out; filter:drop-shadow(0 7px 12px #100a08a0); pointer-events:none;
+}
+.rest-recovery { margin-bottom:1.2rem; }
+.rest-recovery-row { display:grid; grid-template-columns:24px 1fr auto 3rem; align-items:center; gap:.7rem; padding:.7rem 0; border-bottom:1px solid var(--line-soft); }
+.rest-recovery-gain { color:var(--control-positive-border); text-align:right; }
+.rest-screen .rest-consequences { order:-1; }
+.rest-screen .choice-body-columns { grid-template-columns:minmax(0,1fr) minmax(0,1.6fr); }
+.rest-availability summary { cursor:pointer; padding:.5rem 0; color:var(--ink-dim); }
+.rest-screen .class-pick > .glyph .engraved-icon { width:30px; height:30px; color:var(--gold); }
+:root[data-layout='narrow'] .rest-screen .polish-scene-painting > .rest-traveler-foreground { left:4%; bottom:49%; width:92%; height:34%; }
+:root[data-layout='narrow'] .rest-screen .choice-body-columns { grid-template-columns:minmax(0,1fr); }
+:root[data-layout='narrow'] .rest-recovery { margin-bottom:0; }
+body.reduced-motion .rest-screen .rest-traveler-foreground { animation:none; }
+@media (prefers-reduced-motion:reduce) { .rest-screen .rest-traveler-foreground { animation:none; } }
+/* The outer fan cards dip below their anchors; leave that arc above the
+   viewport edge when the landscape layout shares its row with the rails. */
+:root[data-composition='short-wide'] .combat[data-combat-arrangement='rails'] .hand .card { translate:0 calc(-12px / var(--ui-zoom,1)); }

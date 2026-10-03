@@ -1,0 +1,26 @@
+{
+  "exports": {
+    "high": "-q 90 -m 6",
+    "light": "-q 70 -m 6 -resize 768 512"
+  },
+  "files": [
+    {
+      "path": "art/player-polish-runtime/experimental-pass3/rest-traveler-fire.png",
+      "sha256": "888bc77f9e4cea755c00a0bfa1ec782c13b7f03fbf557b49e0970ffcfa86a194",
+      "bytes": 2108318
+    },
+    {
+      "path": "assets/player-polish/illustrations/rest-traveler-fire.webp",
+      "sha256": "3846828c575380f327fd88519449d25bbe474714b3c311293ced8bcf81ee74cc",
+      "bytes": 323582
+    },
+    {
+      "path": "assets-mobile/player-polish/illustrations/rest-traveler-fire.webp",
+      "sha256": "5c21f06ef568f5cce10c7281f62bb86c70cab6a4fa15aca84bfb497c9bea073c",
+      "bytes": 61692
+    }
+  ],
+  "source": "provenance.md",
+  "schema": 1,
+  "encoder": "cwebp 1.6.0"
+}

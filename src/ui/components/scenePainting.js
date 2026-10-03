@@ -21,5 +21,13 @@ export function scenePainting(id) {
   art.alt = '';
   art.decoding = 'async';
   frame.appendChild(art);
+  if (id === 'rest') {
+    const foreground = document.createElement('img');
+    foreground.className = 'rest-traveler-foreground';
+    foreground.src = assetUrl('assets/player-polish/illustrations/rest-traveler-fire.webp');
+    foreground.alt = '';
+    foreground.decoding = 'async';
+    frame.appendChild(foreground);
+  }
   return frame;
 }

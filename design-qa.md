@@ -1,53 +1,47 @@
-# Experimental pass 2 — visual and runtime QA
+# Experimental pass 3 — footer restoration and chapel layers
 
-Final result: blocked for complete twelve-board visual acceptance. This pass is ready for review with the scoped checks below passing. The original rejected implementation is archived in `docs/archive/design-qa-rejected-player-polish.md`; its acceptance claims remain withdrawn.
+Final result: passed for this iteration's scope: the original combat footer, chapel foreground, recovery preview, and associated input behavior. Complete parity across the twelve concept boards remains outside this pass.
 
-Repository: `cehinds/ashenedSpire-js`, branch `experimental`. No upstream merge or promotion.
-Build: **0.7.1.807**, source **d5fbb9cbcd**, external high-resolution art with light fallback.
+## Branch and build
 
-## Changes and gameplay behavior
+- Approved build 807 (`a2af6a4a`) was promoted by creating and pushing `dev`, which did not previously exist in this independent repository.
+- `experimental` was rebased onto that `dev` baseline; Git reported it already up to date. No history rewrite or upstream game merge was needed.
+- This new pass remains on `experimental`. `dev` retains the approved previous build.
+- Build 809, source `1bdff1bbc9`, high-resolution external artwork with light fallback.
 
-- Title: full-body transparent traveler, separate landscape and foreground layers, smaller secondary buttons and engraved icons. Replay scene now animates the visible landscape and traveler. Reduced motion skips that transition.
-- Combat: one scene fills the viewport behind the hand. Smaller corner HUD, compact bottom controls, larger readable hand, left-side player placement and waist-height ordinary Stitched Hounds. Boss/elite stature remains intact. The initial player column is now 1; saved explicit formation preferences still apply.
-- Merchant: expandable stock drawers on desktop and a native category selector on phones. Relics open first when offered. Stock artwork and selected-item rules have separate space; prices and actual inventory still drive availability.
-- Rest: the chapel painting remains visible above a lower control tray, including when smith services are present.
-- End Turn, Buy and Rest commit on a normal click or keyboard activation. Save deletion and other management actions retain confirmation. Card targeting retains click-card/click-target, drag and optional hold.
-- Dodge Roll has a concise resting face. Its expanded rules and actual weight-dependent costs are unchanged. Resource bars now show the proportion remaining in each pool instead of comparing unlike maximum pools by their physical widths.
+## Findings fixed
 
-## Evidence
+- P1: the pass-2 footer moved End Turn to the far edge and separated the controls. Removed its grid-column and width overrides, restoring the original shared five-control model: Actions, Draw, End Turn, Discard/Exhaust, Potions. Short landscape retains the original side rails. Restored the original button appearance as requested.
+- P2: the footer row could clip tall controls on desktop. Its host now reserves 64 physical pixels. All controls stay in the viewport at 1440x900 and 390x844.
+- P2: outer fan cards dipped below the short-landscape viewport. Lifted the rendered cards by 12 physical pixels; measured bottoms remain below 390 at 844x390.
+- P1: the rest scene lacked the reference's seated traveler and fire foreground. Added a transparent, generated 1536x1024 master and high/light WebPs, placed over the existing high-resolution chapel painting. Entry reveal respects reduced motion.
+- P2: recovery information was buried in service text. Added a visible ledger computed from the same live rest plan, before the choices on phone and beside them on desktop. Availability details remain expandable.
+- P2: Rest lacked an explicit accessible button role and direct focused-key activation. Added role, focusability, disabled semantics and guarded Enter/Space activation.
 
-Browser checks used the Codex in-app browser at 1440×900 and 390×844. The composite reference boards' desktop frames are not literally 1440×900 crops; comparisons use their hierarchy, subject placement, screen coverage and supplied layers, rather than stretching the whole board into the viewport.
+## Visual comparison
 
-References reviewed: 01 arrival, 05 combat, 08 merchant/forge, and 09 rest/rewards. This pass changes the title, combat, merchant and rest compositions; it does not claim a new review of every screen on all twelve boards.
+Reference: upper rest scene in `docs/design/player-polish-2026-10-01/09-rest-and-rewards.png`. The footer target is the original game's shared layout, per the user's correction, rather than board 05's right-aligned desktop button.
 
-Captures: `docs/qa/experimental-pass2/`.
+`docs/qa/experimental-pass3/comparison.html` and `rest-comparison.png` place the reference and actual desktop/phone captures in the same view. The source is a composite board with a different crop ratio, so this is a comparison of scene composition and hierarchy, not a claim of pixel equality. Full-size screenshots were also inspected for text and control readability.
 
-- `title-desktop.png`, `combat-desktop.png`, `merchant-desktop.png`, `title-phone.png`, and `combat-phone.png`: packaged build 807.
-- Phone merchant and desktop rest: source preview of the same changes, with final packaged interaction checks recorded in this chat.
-- `entrance-0.png` through `entrance-6.png`: visible traveler reveal and landscape transition.
-- `attack-0.png` through `attack-7.png`: actual attack sequence, including changed player pose and damage feedback; no reduced-motion override.
+- Typography: retained the game's heading/body fonts and readable live values; no text baked into the new foreground.
+- Layout: foreground clears the HUD and meets the lower tray. Recovery precedes the phone actions. Desktop/footer controls remain aligned by the original layout model.
+- Color: retained charcoal/gold frames and the original semantic button colors; warm foreground firelight fits the chapel palette.
+- Images: foreground alpha edges and full silhouette inspected, no missing image elements observed. Master, exact prompt, hashes and encoder options are under `art/player-polish-runtime/experimental-pass3/`.
+- Content: canonical location names, six service options, actual recovery and inventory remain authoritative. The concept's selected-card panel, different title treatment and two-option service list are not substituted for the live game's services.
 
-Actual interactions verified:
+## Runtime and automated evidence
 
-1. Golden Sprout purchase: 999 → 562 cinders, relic added, next 611-cinder offer disabled. Category changes still expose cards, flasks and the remaining shelves.
-2. Gorefire Slash: actions 3 → 2, stamina 2 → 1, mana 1 → 0, first hound HP 16 → 8 with Bleed. Repeated against packaged build 807.
-3. End Turn: immediate Enemy Turn and eventual return to play; the button is disabled during resolution. Tested on desktop and phone.
-4. Rest: one click marks the visit Rested; available services fall from 4 to 3.
-5. Phone: corrected clipped footer and card-tray scrollbar. All five combat footer controls remain visible.
-6. Packaged title: correct build stamp, no broken image elements or document overflow, and no captured warning/error logs. Reduced-motion mode keeps both title layers visible with no animation, including after Replay scene.
+- Phone End Turn immediately enters Enemy Turn, disables during resolution, then returns to Player Turn. Repeated against packaged build 809.
+- Discard opens Card piles; Potions opens the live flask/consumable list.
+- Wounded arrival: preview HP 42 to 66 (+24), mana 0 to 1 (+1). Clicking Rest and separately pressing Enter both apply exactly those values; Space was also verified against packaged build 809. Rest then disables and the ledger shows no further gain.
+- `shotRestState=wounded` affects only the isolated screenshot/test save.
+- 72 focused Node tests pass: player polish, location presentation/scenes, formation, card targeting, and market behavior.
+- Artwork manifest: 5,663 checks passed. External package: 316 checks passed.
+- Packaged rest: 1536-pixel foreground loaded, zero broken images, and reduced-motion animation is `none`.
+- No captured browser warnings/errors in the packaged combat check.
+- Local validation only; Actions remains disabled. Network co-op and full campaign completion were not tested.
 
-## Automated checks
+## Remaining scope
 
-- 81 focused Node tests passed across player-polish, combat sprite scale, scene layers, formation layout, combat targeting, market additions, framework and title contrast suites. The framework suite also reports its 82 internal assertions.
-- `art-manifest.mjs --check`: 5,662 checks passed.
-- `verify-external.mjs`: 316 checks passed.
-- `buildversion.mjs`: current source matches build 807 / d5fbb9cbcd.
-- `git diff --check`: clean.
-
-These are local results; GitHub Actions remains disabled in this independent repository. No campaign completion or network co-op claim.
-
-## Remaining visual differences
-
-The runtime still uses canonical playable-character sprites, live card costs, variable hand sizes and actual shop inventory. Some items (for example Fell Warden Brand) have no dedicated painting and retain a fallback glyph. Dodge Roll still has an icon rather than a concept painting. The rest composition does not yet include the seated traveler/campfire foreground from board 09. Other screens from the twelve-board set have not received this second pass.
-
-Those gaps prevent claiming complete artwork parity. They do not invalidate the recorded interaction results. Keep this work experimental and unmerged.
+Other reference-board screens and missing item/card illustrations remain future work. This iteration does not claim full twelve-board visual acceptance. Previous pass evidence is preserved in `docs/archive/design-qa-pass2.md`.

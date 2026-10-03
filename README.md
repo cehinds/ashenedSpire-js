@@ -30,14 +30,15 @@ The full-resolution runtime art is vendored in `assets/`. Its 5,410 upstream
 files were downloaded from and verified against
 [AshenSpire-art hd-assets-v3](https://github.com/cehinds/AshenSpire-art/releases/tag/hd-assets-v3),
 including the release ZIP SHA-256 and every file hash. This snapshot also keeps
-106 experimental artwork additions and the existing lightweight twins.
+107 experimental artwork additions and the existing lightweight twins.
 Original artwork credits and licenses remain in the repository.
 
-The second experimental pass rebuilds title, combat, merchant and rest
-compositions around the paintings and layers. See [design-qa.md](design-qa.md)
-for live interaction checks, screenshots, input changes and remaining artwork
-differences. The new decorative title traveler master, export hashes and prompt
-are in `art/player-polish-runtime/experimental-pass2/`.
+Approved build 807 (`a2af6a4a`) is the initial `dev` baseline. The next pass on
+`experimental` restores the original centered combat footer and adds the chapel's
+seated traveler, campfire and live recovery ledger. See [design-qa.md](design-qa.md)
+for browser evidence and remaining artwork differences. Decorative masters,
+export hashes and prompts are in `art/player-polish-runtime/experimental-pass2/`
+and `art/player-polish-runtime/experimental-pass3/`.
 
 The immutable upstream manifest, release checksums and credits live under
 `art/upstream-hd-assets-v3/`. Verify the high-resolution files locally with:
