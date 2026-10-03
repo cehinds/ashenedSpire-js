@@ -33,7 +33,7 @@ including the release ZIP SHA-256 and every file hash. This snapshot also keeps
 107 experimental artwork additions and the existing lightweight twins.
 Original artwork credits and licenses remain in the repository.
 
-Approved build 807 (`a2af6a4a`) is the initial `dev` baseline. The next pass on
+Approved build 807 (`a2af6a4a`) is the initial `dev` baseline. The subsequent pass on
 `experimental` restores the original centered combat footer and adds the chapel's
 seated traveler, campfire and live recovery ledger. See [design-qa.md](design-qa.md)
 for browser evidence and remaining artwork differences. Decorative masters,

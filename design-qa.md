@@ -6,7 +6,7 @@ Final result: passed for this iteration's scope: the original combat footer, cha
 
 - Approved build 807 (`a2af6a4a`) was promoted by creating and pushing `dev`, which did not previously exist in this independent repository.
 - `experimental` was rebased onto that `dev` baseline; Git reported it already up to date. No history rewrite or upstream game merge was needed.
-- This new pass remains on `experimental`. `dev` retains the approved previous build.
+- The user approved this pass and the Dodge Roll chevron follow-up for promotion to `dev`.
 - Build 809, source `1bdff1bbc9`, high-resolution external artwork with light fallback.
 
 ## Findings fixed
@@ -45,3 +45,9 @@ Reference: upper rest scene in `docs/design/player-polish-2026-10-01/09-rest-and
 ## Remaining scope
 
 Other reference-board screens and missing item/card illustrations remain future work. This iteration does not claim full twelve-board visual acceptance. Previous pass evidence is preserved in `docs/archive/design-qa-pass2.md`.
+
+## Approved follow-up
+
+Removed the floating truncated-text chevron from Dodge Roll in combat, including its reserved title padding. Normal card selection still exposes the full rules and Information opens the detailed Dodge Roll dialog; both were verified in the browser at 844x390. No mechanics changed.
+
+Packaged build 810 (`5363d038f5`) passes all 316 external-package checks. The rebuilt combat preview confirms the Dodge chevron is hidden, with no captured console errors. Screenshot: `docs/qa/experimental-pass3/dodge-no-chevron.png`.
