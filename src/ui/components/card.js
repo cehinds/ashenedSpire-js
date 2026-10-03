@@ -1,3 +1,4 @@
+import { illustratedCardHtml, fitIllustratedCardText } from './illustratedCard.js';
 import { bindCardInspection, openCardInspection } from './cardInspection.js';
 import { cardActions } from '../../services/cardActions.js';
 import { configureTooltipGlossary, decorateKeywords } from './tooltipGlossary.js';
@@ -137,7 +138,7 @@ export function renderCard(registries, ref, opts = {}) {
   // type band), and one shared row budget below the band that tags and text
   // divide. `as-card` is the recipe; the old class names stay as the hooks
   // every tool and screen reads.
-  el.className = playingCardClasses(model);
+  el.className = playingCardClasses(model) + ' illustrated-card';
   // Type presentation is data (balance.ui.cardTypes): corner radii carry the
   // type (attack squarest → power roundest) and each type owns its banner
   // colour. Renaming a label here never touches engine logic.
@@ -222,111 +223,19 @@ export function renderCard(registries, ref, opts = {}) {
   });
   let drawn = levelNow();
   const paint = (at) => {
-    const visible = new Set(cardFields(at, { surface: opts.surface || 'none' }).visible);
-    const region = (key, html) => (visible.has(key) ? html : '');
-    // HIDE BY NOT RENDERING. A region left in the markup and hidden in CSS
-    // still takes its share of the face's row budget, so the card would be the
-    // same card with holes rather than a larger-typed one — and a screen
-    // reader would announce a field the player cannot see.
-    const body = region('type', `<div class="ctype">${esc(model.type.label)}</div>`)
-      + region('effects', `<div class="ctext cd-text">${at === 'glance' && model.id === 'dodgeRoll'
-        ? 'Roll to evade. On success, gain Block. Cost reflects your current weight.'
-        : fillTemplate(def, model.tokens, model.baseTokens)}</div>`);
-    // The information button and the chevron are children of the card that
-    // `bindCardInspection` appended with their own listeners; a repaint must
-    // hand them back rather than take them away.
-    // WHAT A REPAINT MAY DESTROY IS WHAT IT DREW, AND NOTHING ELSE.
-    //
-    // This kept a NAMED PAIR — the `i` and the chevron — on the premise that
-    // they are the only children a caller adds. They are not. The combat hand
-    // appends a positional keycap, a `card-unavailable-reason` pill and its
-    // `.hand-hit-lane` to the card AFTER the renderer has run (hand.js), and
-    // selection repaints now, so the first tap on a card in combat deleted
-    // them. The hit lane is part of how the hand decides what a touch landed
-    // on, so this could move where a player's taps go.
-    //
-    // An allow-list of foreign children cannot be right, because the renderer
-    // cannot know what a surface will add. Invert it: mark the children THIS
-    // renderer drew and keep everything unmarked. New callers and new
-    // decorations are then safe by default rather than by remembering to come
-    // back and edit a list here.
-    //
-    // Guarded, because this renderer is also exercised against the minimal DOM
-    // the wireframe tests build, which has no `children`. There is nothing to
-    // keep on a first paint in any case — the door has not run yet.
-    const kept = el.children
-      ? [...el.children].filter((node) => node?.dataset?.cardPainted !== '1')
-      : [];
-    el.innerHTML =
-      region('facts', `<div class="card-costs card-cost-rail">${costRows.map(([resource, cls, icon, value]) =>
-        `<div class="${cls}" aria-label="${resourceWord(resource)} cost: ${esc(value)}">${engravedIconHtml(resource) || `<span aria-hidden="true">${icon}</span>`} ${esc(value)}</div>`
-      ).join('')}</div>`) +
-
-      `<div class="cname" data-identity-part="name">${esc(model.name)}</div>` +
-      region('art', `<div class="art" data-identity-part="artwork" data-artwork-anchor="${artworkAnchor('card')}">${cardPainting
-        ? `<img class="player-card-painting${sourcePiece ? ' is-equipment-art' : ''}" src="${esc(cardPainting)}" alt="" aria-hidden="true">`
-        : `<span class="card-art-glyph">${engravedIconHtml(engravedGlyphId(model.icon)) || esc(model.icon)}</span>`}` +
-      // Subtypes: authored in content/source/tagging.csv. Untagged cards
-      // render nothing here, so the layout is unchanged for them.
-      (tags.length && visible.has('tags')
-        ? `<div class="ctags cd-tags">${tags
-            .map((t) => `<span class="ctag as-tag" style="--tag-color:#${esc(t.color)}" data-tip="${esc(t.blurb + (t.inheritedFrom.length ? ` Granted by ${t.inheritedFrom.join(', ')}.` : ''))}">${esc(t.glyph)} ${esc(t.label)}</span>`)
-            .join('')}</div>`
-        : '') + '</div>') +
-      (body ? `<div class="cd-body">${body}</div>` : '') +
-      region('footer', metadataBand(def.rarity, opts.owned));
-    // Stamp what this paint drew BEFORE the kept children go back on, so the
-    // next repaint can tell the two apart. Guarded for the same minimal DOM.
-    if (el.children) for (const node of el.children) { if (node.dataset) node.dataset.cardPainted = '1'; }
-    for (const node of kept) el.append(node);
-    // A WITHHELD REGION GIVES ITS TRACK BACK.
-    //
-    // WC1 lays the face out on four authored bands — name / art / body /
-    // metadata — and the level decides which of those children are drawn. The
-    // bands were the authored four regardless, so a `glance` card that
-    // withholds its metadata band left an EMPTY TRAILING TRACK: about a tenth
-    // of the face spent on nothing, and none of it returned to the rule text.
-    // That is the opposite of the claim levels are built on — that omitting a
-    // region returns its pixels — and it held for the equipment face (whose
-    // solver already recomputes rows) while quietly not holding here.
-    //
-    // The card states the bands for the children it ACTUALLY drew, in face
-    // order. The numbers are still the authored ones; only the absent band is
-    // dropped, so the remaining shares keep their proportions to each other.
-    {
-      const drawn = [
-        true,                                   // .cname, always
-        visible.has('art'),                     // .art
-        Boolean(body),                          // .cd-body (type and/or effects)
-        visible.has('footer'),                  // .card-metadata
-      ];
-      const bands = cardShape().bands.filter((_, index) => drawn[index]);
-      el.style.setProperty('--card-bands', bands.map((b) => `minmax(0, ${b}fr)`).join(' '));
-      // THE COST RAIL HANGS UNDER THE HEAD BAND, SO IT MOVES WITH IT.
-      // `--card-band-head` is the head's share of the face, projected once on
-      // :root as head/total = 10%. Withholding a band changes that total —
-      // 1/9 rather than 1/10 — so a rail pinned to the root value drifts up
-      // into the name it is meant to sit below: measured at shop glance, 0.3px
-      // of clearance against the 2.7px the four-band face gives. Re-derived
-      // here from the same list, so the rail and the bands cannot disagree.
-      const total = bands.reduce((sum, b) => sum + b, 0);
-      el.style.setProperty('--card-band-head', `${(bands[0] / total) * 100}%`);
-      // The layout's own invariant, asserted where it is created rather than
-      // left to a gate that does not look at bands: one track per in-flow
-      // child. The `drawn` list is a positional mirror of the emit order
-      // below, and a future edit that adds a fifth in-flow child or reorders
-      // the emits would silently misalign every band on every card.
-      el.dataset.cardBands = String(bands.length);
-    }
-    el.dataset.level = at;
-    // `data-tag-rows` is what the stylesheet and every tool read to know the
-    // text's share of the budget. At a level that withholds the chips there
-    // are no tag rows, whatever the card's own data says.
-    el.dataset.tagRows = tags.length && visible.has('tags') ? '1' : '0';
-    // MEASURED, NOT GUESSED: the name shrinks to one line, tags past the second
-    // row defer to `+N`, and the text takes what the budget leaves. CSS cannot
-    // count or measure, so the renderer reports after the first paint.
+    const kept=el.children?[...el.children].filter(node=>node?.dataset?.cardPainted!=='1'):[];
+    el.innerHTML=illustratedCardHtml(model,{
+      rules:at==='glance'&&model.id==='dodgeRoll'?'Roll to evade. On success, gain Block. Cost reflects your current weight.':fillTemplate(def,model.tokens,model.baseTokens).replace(/\. (?=[A-Z])/g,'.\n'),
+      painting:sourcePiece?cardPainting:null,
+      glyph:engravedIconHtml(engravedGlyphId(model.icon))||esc(model.icon),
+    });
+    if(el.children)for(const node of el.children)if(node.dataset)node.dataset.cardPainted='1';
+    for(const node of kept)el.append(node);
+    el.dataset.level=at;
+    el.dataset.cardLayout='illustrated-v1';
     scheduleCardFits([el]);
+    el.setAttribute('aria-label',model.name);
+
   };
   paint(drawn);
 
@@ -432,7 +341,8 @@ export function fitCardFace(el) { fitCardFaces([el]); }
 // Every phase reads the whole batch before the next phase writes. The number
 // of forced layouts is bounded by fitting stages, not by cards times tags.
 function fitCardFaces(cards) {
-  const rows = cards.filter(el => el?.isConnected).map(el => {
+  for(const card of cards)if(card?.isConnected && card.classList.contains('illustrated-card'))fitIllustratedCardText(card);
+  const rows = cards.filter(el => el?.isConnected && !el.classList.contains('illustrated-card')).map(el => {
     const name = el.querySelector('.cname'), tags = el.querySelector('.ctags');
     return { el, name, tags, chips: [...(tags?.querySelectorAll('.ctag') || [])], more: null, hidden: 0, tagRows: 0 };
   });

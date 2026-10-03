@@ -910,7 +910,7 @@ export function mountCombat(app, { registries, run, combat, meta, onEnd, showTut
     if (host) {
       host.innerHTML = '';
       const mainPlan = resourceBarPlan(registries, 'main', pv, p, resDomains);
-      host.appendChild(resourceBars(mainPlan, { surface: 'main', tooltipExtra: poiseTip('player') }));
+      host.appendChild(resourceBars(mainPlan.filter(bar=>bar.id==='hp'), { surface: 'main', tooltipExtra: poiseTip('player') }));
       host.querySelectorAll('[data-tip-attached]').forEach(node => { node.tabIndex = 0; });
     }
     // WGH6: the same relic tile renderer the rooms use (components/relicRail.js);
@@ -2322,6 +2322,7 @@ export function mountCombat(app, { registries, run, combat, meta, onEnd, showTut
   // stale copy of a number the row already shows.
   for (const { selector, title, message } of tooltipHelp.combatTargets) {
     const node = $(selector);
+    if (!node) continue;
     node.tabIndex = 0;
     attachTooltip(node, () => `<div class="tt-title">${esc(title)}</div>${esc(helpText(message, {
       className: runClassIdentity(registries, run).name, classDescription: registries.classes.get(run.class).description || '',

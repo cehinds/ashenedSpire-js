@@ -1,0 +1,57 @@
+{
+  "source": "User supplied Card Studio exports, October 3 2026",
+  "imports": [
+    {
+      "file": "gorefire.json",
+      "sha256": "e82c5e93ea62bba238b12c2c57fc1fea9e249023a9992fd9dbd131868c675514"
+    },
+    {
+      "file": "armoury (1).json",
+      "sha256": "326fc9b1d6bd5e99509ace4584ccb011b99ac41f02d515980402f0e2a0468ac4"
+    },
+    {
+      "file": "enemy-turn.json",
+      "sha256": "1cd35045bfe8d2b8792612a3ce97136428f9e3c62118289ae687df28653d2434"
+    },
+    {
+      "file": "intent.json",
+      "sha256": "a7e7b1060c557b0bf4b8eebde711357f2830976500751b8d94215e5a87a3fe71"
+    },
+    {
+      "file": "menu.json",
+      "sha256": "f8cc48cdae8bd2e97ecdde372cd01a11629c5ea7230b710ac2c62f5d6e898dcb"
+    },
+    {
+      "file": "player-turn.json",
+      "sha256": "709ac707ab89600db1b9ce6b54052bdbe8d2ca4449faaa3a630c05dc24cee280"
+    },
+    {
+      "file": "gorefire (1).json",
+      "sha256": "1fd6a28e696b9baa2c3b93bf2754cc8fa5fa773c7046b6f136f5d189a24499ed"
+    },
+    {
+      "file": "gorefire (2).json",
+      "sha256": "a29b43a56d4c1abbbdf574b0a1100492283fdbdf89bb29a3d9b6f38a505ab727"
+    },
+    {
+      "file": "gorefire (3).json just stamina cost.json",
+      "sha256": "5c3d56964388ab161cf5a9bce99b3c2ca5ec223a12c0c9c1d29c1bbd1af05f77"
+    },
+    {
+      "file": "gorefire (3).json stamina and mana cost.json",
+      "sha256": "ada2145d3ff4081e220d625c142fd04052c9e18e58ca1413daff1a60efe46e2a"
+    },
+    {
+      "file": "gorefire (3).json -single cost again.json",
+      "sha256": "5c3d56964388ab161cf5a9bce99b3c2ca5ec223a12c0c9c1d29c1bbd1af05f77"
+    },
+    {
+      "file": "gorefire (3).json",
+      "sha256": "504dd73005be3035aa61b37686dfaa819ac285b92364d0de209a51814ee387d9"
+    },
+    {
+      "file": "gorefire (4).json",
+      "sha256": "8c7ae276bb22de1d5dce1fac244cc4eb35468115d44d3dc14e21f82febbb111b"
+    }
+  ]
+}

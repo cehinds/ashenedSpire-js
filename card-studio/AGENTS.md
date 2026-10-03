@@ -15,3 +15,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 ## October 3 editor upgrades
 
 Use supplied Footer Atelier PNGs for the antique brass stamina harness, green stamina orb, green action sigil and blue mana diamond. Put editable values inside their icons and group their image/text layers by default. Support marquee and Shift selection, right-click grouping, group drag/resize, snap/grid, alignment and keyboard editing. Keep groups in local saves and portable JSON. Turn banners have a subtle adjustable red hue and outline treatment shared by preview and PNG export. Root agent owns authorized game-repository integration; this editor output remains the implementation workspace.
+
+## Approved layout and library
+
+October 3: supplied JSON exports define the approved card structure and UI layouts. Reuse the card geometry across all cards while binding game-specific data. Preserve source hidden states (the supplied Player Turn has every layer hidden). Bottom HUD runtime is a separate workstream. Add a multi-select component library to Layers and hue controls for individual layers, groups and the composition.
