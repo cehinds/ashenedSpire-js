@@ -475,3 +475,25 @@ body.reduced-motion .rest-screen .rest-traveler-foreground { animation:none; }
 /* The outer fan cards dip below their anchors; leave that arc above the
    viewport edge when the landscape layout shares its row with the rails. */
 :root[data-composition='short-wide'] .combat[data-combat-arrangement='rails'] .hand .card { translate:0 calc(-12px / var(--ui-zoom,1)); }
+
+/* Floating header components keep their content over the scene without a panel. */
+:root .shared-hud,
+:root .shared-hud :is(.hud-top,.hud-info-row,.hud-resource-row,.hud-vitals-panel,.hud-identity,.hud-center,.hud-trail,.as-statstrip,.as-chip) {
+ background:none; border:0; border-image:none; box-shadow:none;
+}
+:root .shared-hud :is(.hud-info-row,.resbars) { text-shadow:0 1px 3px #000,0 0 5px #0009; }
+
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) > .shared-hud > .hud-top {
+ grid-template-areas:'meters . actions' 'rail . actions';
+}
+:root .shared-hud .hud-vitals-panel { padding:0; }
+:root .shared-hud .hud-info-row { align-self:center; }
+:root .shared-hud .illustrated-hud-button { display:flex; align-items:center; justify-content:center; background:none; border:0; box-shadow:none; padding:5px; }
+:root .shared-hud .illustrated-hud-icon { position:relative; display:block; overflow:hidden; pointer-events:none; }
+:root .shared-hud .illustrated-hud-icon img { position:absolute; max-width:none; object-fit:fill; }
+:root .shared-hud .illustrated-hud-button:is(:hover,:focus-visible) { filter:drop-shadow(0 0 3px #e1bd73); }
+
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) .shared-hud .hud-vitals-panel { background:none; }
+
+/* Enlarge the complete HP row while reserving its scaled height above relics. */
+:root .shared-hud .resbars-host { zoom:1.22; }

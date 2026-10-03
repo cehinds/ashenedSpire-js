@@ -559,3 +559,5 @@ ui-studio/workspace/settings.json
 /build/experimental/
 /art/upstream-hd-assets-v3/.art-cache/
 /build/experimental-pass3/
+
+/build/card-components-preview/

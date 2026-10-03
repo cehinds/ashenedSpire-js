@@ -12,6 +12,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } from 'node:fs';
 import vm from 'node:vm';
+import { generateCardComponents, writeCardObjects } from './card-components.mjs';
 import { readdirSortedSync } from './dirorder.mjs';
 import { MIME, runtimeAsset } from './assetmime.mjs';
 import { MOBILE_ASSET_DIR, MOBILE_BUNDLE_BUDGET_BYTES, distinctAssetId } from './mobileart-policy.mjs';
@@ -230,6 +231,7 @@ function fail(msg, items) {
 // ---------------------------------------------------------------------------
 // 1. Parse index.html: ordered stylesheet hrefs + module entry src.
 // ---------------------------------------------------------------------------
+const compiledCardComponents=generateCardComponents(ROOT);
 const indexPath = resolve(ROOT, 'index.html');
 if (!existsSync(indexPath)) fail('index.html not found at ' + indexPath);
 const indexHtml = readText(indexPath);
@@ -1133,6 +1135,7 @@ if (MOBILE && Buffer.byteLength(html, 'utf8') > MOBILE_BUNDLE_BUDGET_BYTES) {
 // whole property is a second copy of a path. OUT_DIR / OUT_PATH, one home.
 mkdirSync(OUT_DIR, { recursive: true });
 writeFileSync(OUT_PATH, html, 'utf8');
+writeCardObjects(compiledCardComponents,OUT_DIR);
 
 // THE SIBLING DIRECTORIES THE WEB EDITION NO LONGER CARRIES (step 3c).
 //

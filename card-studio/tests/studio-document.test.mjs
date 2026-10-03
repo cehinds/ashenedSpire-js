@@ -7,9 +7,9 @@ import {validateDocument,portableDocument,readPng} from '../src/studio-export.js
 globalThis.FileReader=class{readAsDataURL(blob){blob.arrayBuffer().then(b=>{this.result=`data:${blob.type};base64,${Buffer.from(b).toString('base64')}`;this.onload?.()}).catch(e=>this.onerror?.(e))}};
 globalThis.fetch=async url=>{const b=readFileSync(new URL('../public'+url,import.meta.url));return {ok:true,blob:async()=>new Blob([b],{type:'image/png'})}};
 
-test('all 17 component documents validate and reference actual PNG assets',()=>{
-  assert.equal(presets.length,17);
-  for(const p of presets){assert.equal(validateDocument(p),p);assert.ok(p.layers.some(l=>l.type==='text'));for(const l of p.layers.filter(l=>l.type==='image')){const bytes=readFileSync(new URL('../public'+l.src,import.meta.url));assert.deepEqual([...bytes.subarray(0,8)],[137,80,78,71,13,10,26,10]);}}
+test('all 18 component documents validate and reference actual PNG assets',()=>{
+  assert.equal(presets.length,18);
+  for(const p of presets){assert.equal(validateDocument(p),p);assert.ok(p.layers.length>0);assert.equal(new Set(p.layers.map(l=>l.id)).size,p.layers.length);assert.ok(p.layers.every(l=>['text','image'].includes(l.type)));for(const l of p.layers.filter(l=>l.type==='image')){const bytes=readFileSync(new URL('../public'+l.src,import.meta.url));assert.deepEqual([...bytes.subarray(0,8)],[137,80,78,71,13,10,26,10]);}}
 });
 test('portable JSON round trip retains edits, layer ordering and exact PNG bytes',async()=>{
   const input=clone(presets[0]);input.layers.find(l=>l.id==='title').text='Portable card check';input.layers.find(l=>l.id==='rules').text='Deal 12 damage.\nApply 4 Bleed.';input.layers.find(l=>l.id==='mana-value').text='3';input.layers.find(l=>l.id==='art').x=-91;
