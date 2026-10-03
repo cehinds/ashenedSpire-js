@@ -1,0 +1,21 @@
+{
+  "schema": 2,
+  "repo": "cehinds/AshenSpire-art",
+  "tag": "hd-assets-v3",
+  "zip": "hd-assets-v3.zip",
+  "sha256": "787bea5183c5890cfc1c44794234ca57c16408526edbb88ca3a344224823d525",
+  "packs": {
+    "high": {
+      "zip": "hd-assets-v3.zip",
+      "sha256": "787bea5183c5890cfc1c44794234ca57c16408526edbb88ca3a344224823d525"
+    },
+    "light": {
+      "zip": "light-assets-v3.zip",
+      "sha256": "06f35ca33c7aa1833990429f0da00ac43120daf2a377add408c0f1bda7bb75e6"
+    },
+    "common": {
+      "zip": "common-assets-v3.zip",
+      "sha256": "aac59d9e6f057d876033a823c4f6cc9e2616c01fca6797ec557fe4da58bc80e6"
+    }
+  }
+}
