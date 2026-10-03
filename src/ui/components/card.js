@@ -229,7 +229,9 @@ export function renderCard(registries, ref, opts = {}) {
     // same card with holes rather than a larger-typed one — and a screen
     // reader would announce a field the player cannot see.
     const body = region('type', `<div class="ctype">${esc(model.type.label)}</div>`)
-      + region('effects', `<div class="ctext cd-text">${fillTemplate(def, model.tokens, model.baseTokens)}</div>`);
+      + region('effects', `<div class="ctext cd-text">${at === 'glance' && model.id === 'dodgeRoll'
+        ? 'Roll to evade. On success, gain Block. Cost reflects your current weight.'
+        : fillTemplate(def, model.tokens, model.baseTokens)}</div>`);
     // The information button and the chevron are children of the card that
     // `bindCardInspection` appended with their own listeners; a repaint must
     // hand them back rather than take them away.

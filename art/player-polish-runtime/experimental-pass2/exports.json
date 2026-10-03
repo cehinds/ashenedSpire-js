@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "source": "title-traveler.provenance.md",
+  "encoder": "cwebp 1.6.0",
+  "exports": {
+    "high": "-q 90 -m 6",
+    "light": "-q 70 -m 6 -resize 512 768"
+  },
+  "files": [
+    {
+      "path": "art/player-polish-runtime/experimental-pass2/title-traveler.png",
+      "bytes": 2316438,
+      "sha256": "5820be2a7e5755ff36cffb8363b263e40422a0ce9640e34a8fea5c913ccd4fa6"
+    },
+    {
+      "path": "assets/player-polish/illustrations/title-traveler.webp",
+      "bytes": 342100,
+      "sha256": "9544e3a9fee606ca96de781e4237a529a56601076912121e032faa359cf9a30f"
+    },
+    {
+      "path": "assets-mobile/player-polish/illustrations/title-traveler.webp",
+      "bytes": 66460,
+      "sha256": "fe07d295c6735784388b8457d5d82c9fc90cd73c88abbd0aaa6526acc7635493"
+    }
+  ]
+}

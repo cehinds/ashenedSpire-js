@@ -1062,19 +1062,19 @@ export function beatArmer(meta, registries) {
     // mounted. A screen passes a function; a static action passes an object.
     const ctxOf = typeof ctx === 'function' ? ctx : () => ctx;
     const formNow = () => beatFor(actionId, ctxOf()).form;
+    // Experimental art-led runtime: ordinary turn/service actions activate
+    // on release. Destructive and irreversible management retain review.
+    const direct = ['endTurn', 'shopBuy', 'shrineRest'].includes(actionId);
 
     el.dataset.beatAction = actionId;
     const initial = beatFor(actionId, ctxOf());
     el.dataset.beat = initial.form;
     el.dataset.optionDecision = actionId;
-    el.dataset.optionTap = 'modal';
-    el.dataset.optionHold = dialMs > 0 ? 'commit' : 'disabled';
+    el.dataset.optionTap = direct ? 'commit' : 'modal';
+    el.dataset.optionHold = !direct && dialMs > 0 ? 'commit' : 'disabled';
 
-    // Constantine's revised universal option contract: a short activation
-    // reviews, while a deliberate hold approves the exact same callback and
-    // skips the modal. The old beat classification remains published for
-    // stakes/audit context; it no longer chooses between incompatible UI
-    // forms. Every action routed through this door receives one interaction.
+    // Actions outside the direct set retain short-press review and deliberate
+    // hold confirmation. The beat classification still publishes their stakes.
     // W2 SLOTS (question, target, exact consequence): a caller that authors
     // `target` and `message` fills the review's body with facts. A caller that
     // authors neither keeps the older generic line below — W2a's service
@@ -1110,14 +1110,14 @@ export function beatArmer(meta, registries) {
       });
     };
     const disarm = armHold(el, {
-      ms: dialMs,
+      ms: direct ? 0 : dialMs,
       onConfirm,
-      onTap: review,
+      onTap: direct ? onConfirm : review,
       tapOnEarlyRelease: true,
       id: actionId,
       hintHost,
       hintBefore,
-      showHint,
+      showHint: showHint && !direct,
     });
     // THE OTHER HALF OF "ALL INSTANCES" (S7 wide), and it is a REGISTRATION,
     // never a list. Some actions are reached without the focus cursor at all —

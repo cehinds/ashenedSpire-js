@@ -60,7 +60,7 @@ test('the real roster keeps encounter classification and fits every elite/boss r
     const ratio = combatSpriteRatio(statureFor(registries, id), id);
     if (row.pool === 'elite') assert.ok(ratio >= 1.5 && ratio <= 2, id);
     else if (row.pool === 'boss') assert.ok(ratio >= 1.5 && ratio <= 3, id);
-    else assert.equal(ratio, 1, id);
+    else assert.equal(ratio, id === 'stitchedHound' ? .68 : 1, id);
   }
   assert.equal(combatSpriteRatio('huge', 'stitchedKing'), 2);
   assert.equal(combatSpriteRatio('huge', 'ashheartDragon'), 3);

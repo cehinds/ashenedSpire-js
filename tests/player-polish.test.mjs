@@ -5,6 +5,19 @@ import { engravedIconId, engravedIconUrl, engravedIconHtml, engravedGlyphId, eng
 import { setHighResSource, setBuiltInSource } from '../src/ui/assetmap.js';
 import { refreshMountedArt } from '../src/ui/highResArt.js';
 
+test('served masks resolve from the document rather than the stylesheet folder', () => {
+  const previous = globalThis.location;
+  try {
+    globalThis.location = { protocol: 'http:', href: 'http://localhost:4184/game/index.html' };
+    assert.equal(engravedMaskUrl('health'), 'http://localhost:4184/game/assets/player-polish/ui/icons/health.svg');
+    setBuiltInSource(new Map([['assets/player-polish/ui/icons/health.svg', 'objects/health.svg']]));
+    assert.equal(engravedMaskUrl('health'), 'http://localhost:4184/game/objects/health.svg');
+  } finally {
+    setBuiltInSource(null);
+    if (previous === undefined) delete globalThis.location; else globalThis.location = previous;
+  }
+});
+
 test('engraved resource aliases retain canonical engine identities', () => {
   assert.equal(engravedIconId('energy'), 'actions');
   assert.equal(engravedIconId('action'), 'actions');

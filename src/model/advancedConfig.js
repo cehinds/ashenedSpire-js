@@ -56,7 +56,7 @@ const PRESENTATION_DEFAULTS = Object.freeze({
   enemySpriteScale: 1,
   playerSpawnRow: 'C',
   enemySpawnRow: 'C',
-  playerSpawnColumn: '2',
+  playerSpawnColumn: '1',
   enemySpawnColumn: '3',
   showFormationGrid: false,
   movementEnabled: false, movementNeedsSelection: true, movementCostsAction: true,

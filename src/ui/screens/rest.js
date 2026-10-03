@@ -357,7 +357,7 @@ export function mountRest(app, { registries, run, meta, onDone, onReallocate = n
   // #1195), so the foot is the way out.
   const leave = multiUse || relicNoRest ? button({ label: t('rest.continue'), weight: 'primary', id: 'shrine-leave', className: 'shrine-leave' }) : null;
   const consequences = el('aside', { class: 'choice-body-consequences choice-status rest-consequences', 'aria-label': t('rest.consequences.heading') });
-  app.querySelector('.rest-screen').appendChild(scenePainting(stay.services.smith ? 'forge' : 'rest'));
+  app.querySelector('.rest-screen').appendChild(scenePainting('rest'));
   mountChoiceBody(app.querySelector('.rest-screen'), {
     className: 'rest-door',
     eyebrow: t('rest.eyebrow'),

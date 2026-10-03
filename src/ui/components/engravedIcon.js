@@ -27,7 +27,11 @@ export function engravedMaskUrl(id, protocol = globalThis.location?.protocol) {
   const url = engravedIconUrl(id);
   const resolved = engravedIconId(id);
   if (resolved && assetTier(`assets/player-polish/ui/icons/${resolved}.svg`) === 'high' && !/^(data:|blob:)/i.test(url)) return null;
-  return protocol === 'file:' && url && !/^(data:|blob:|https?:)/i.test(url) ? null : url;
+  if (protocol === 'file:' && url && !/^(data:|blob:|https?:)/i.test(url)) return null;
+  // CSS custom-property URLs resolve at the consuming stylesheet. Resolve
+  // against the document first so native ESM and exported builds agree.
+  return url && /^https?:$/.test(protocol) && globalThis.location?.href
+    ? new URL(url, globalThis.location.href).href : url;
 }
 const maskValue = (url) => `url("${String(url).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/[\r\n\f]/g, '')}")`;
 const htmlAttribute = (value) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

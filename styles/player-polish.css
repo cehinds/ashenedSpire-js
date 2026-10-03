@@ -359,3 +359,118 @@ main:has(> .rest-screen) > .shared-hud .hud-vitals-panel { max-width:28rem; padd
 :root[data-composition='short-wide'] .rest-screen .polish-scene-painting { display:block; }
 :root[data-composition='short-wide'] .rest-screen { padding:1rem; }
 :root[data-composition='short-wide'] .rest-screen .rest-door { max-height:100%; }
+
+/* Experimental pass 2: scene-first compositions from boards 01, 05 and 08. */
+.title-screen .as-titlemenu { width:min(35%,42rem); }
+.title-screen .title-menu { gap:.65rem; }
+.title-screen .title-menu > li:nth-child(n+3) { width:82%; align-self:center; }
+.title-screen .title-menu .tm-entry { display:flex; align-items:center; justify-content:center; gap:.8rem; font-weight:500; }
+.title-screen .title-menu .slot-continue { min-height:6.2rem; }
+.title-screen .title-menu .tm-entry .engraved-icon { color:var(--gold); }
+.title-screen .title-traveler { left:3%; bottom:3%; width:28%; height:66%; object-position:center bottom; filter:drop-shadow(0 12px 16px #0008); }
+.title-screen::before { background:linear-gradient(180deg,#0d0b0810 20%,#0d0b0840 80%,#0d0b08a0); }
+.title-screen .tm-name { font-weight:500; letter-spacing:.07em; }
+
+/* A compact corner HUD exposes the painting while retaining every resource. */
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) > .shared-hud { padding:1rem 1.4rem; }
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) > .shared-hud > .hud-top {
+ display:grid; grid-template-columns:18rem 1fr auto; grid-template-areas:'info . actions' 'meters . actions' 'rail . .'; gap:.35rem 1rem; align-items:start;
+}
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) .shared-hud .hud-info-row { display:flex; flex-wrap:wrap; gap:.35rem; padding:0; }
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) .shared-hud .hud-identity { flex:1; }
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) .shared-hud .hud-trail { display:none; }
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) .shared-hud .hud-vitals-panel { width:100%; max-width:none; box-sizing:border-box; padding:.4rem .6rem; background:#17130fc9; }
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) .shared-hud .resbars { display:flex; flex-direction:column; gap:.3rem; }
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) .shared-hud .hud-bottom { background:none; }
+:root .combat[data-layout='formation'] { grid-template-rows:0 minmax(0,1fr) 30% 0; }
+:root .combat[data-layout='formation'] > .hand-area { grid-template-rows:minmax(0,1fr) 5.5rem; margin:0; padding:0; }
+:root .combat[data-layout='formation'] .environment-backdrop::before { background:linear-gradient(180deg,#08070610 25%,transparent 55%,#080706a0 100%); }
+:root .combat[data-layout='formation'] .combatant .sprite { --combatant-edge:drop-shadow(0 2px 2px #100b08a0); }
+:root .combat[data-layout='formation'] > .hand-area > .combat-action-row {
+ grid-template-columns:5rem 7rem minmax(0,1fr) 8rem 5rem 14rem; gap:.8rem; padding:.6rem 2rem;
+}
+:root .combat[data-layout='formation'] .combat-action-row > .end-turn { grid-column:6; width:100%; }
+:root .combat[data-layout='formation'] .combat-action-row > .spent { grid-column:4; }
+:root .combat[data-layout='formation'] .combat-action-row > .combat-potions { grid-column:5; }
+:root .combat[data-layout='formation'] .combat-action-row > .draw { grid-column:2; }
+:root .combat[data-layout='formation'] .combat-action-row > .energy-orb { grid-column:1; }
+.combat .turn-ribbon { top:3%; background:#16120bbc; }
+
+/* Merchant drawers expand in place. Mobile uses the same categories in one select. */
+:root[data-layout='wide']:not([data-composition='short-wide']) .shop-workspace:not(.master-workspace) .shop-frame { width:52%; }
+:root .shop-workspace:not(.master-workspace) { padding:7rem 2.5rem 2rem; }
+:root .shop-workspace:not(.master-workspace) .shop-frame { background-color:#17130fd4; background-image:none; }
+:root .shop-workspace:not(.master-workspace) .shop-railed { display:flex; flex-direction:column; gap:.35rem; overflow:auto; }
+:root .shop-workspace:not(.master-workspace) .shop-railitem { flex:0 0 auto; min-height:3.2rem; width:100%; padding:.45rem 1rem; display:flex; justify-content:space-between; }
+:root .shop-workspace:not(.master-workspace) .shop-pane { flex:1 0 25rem; min-height:25rem; max-height:36rem; padding:0; animation:playerSceneReveal 200ms ease-out; }
+:root .shop-workspace:not(.master-workspace) .shop-pane-head { display:none; }
+:root .shop-workspace:not(.master-workspace) .shop-body { height:100%; min-height:0; gap:0; }
+:root .shop-workspace:not(.master-workspace) .shop-offers { min-height:13rem; }
+:root .shop-workspace:not(.master-workspace) .shop-detail { padding:.7rem 1.2rem; background:#0f0c09bb; }
+:root .shop-workspace:not(.master-workspace) .shop-detail-desc { margin:.4rem 0; }
+.shop-category-select { display:none; }
+.service-portrait { width:46%; height:90%; left:0; }
+
+:root[data-layout='narrow'] .title-screen .as-titlemenu { width:100%; }
+:root[data-layout='narrow'] .title-screen .title-traveler { width:36%; height:32%; left:1%; top:5%; bottom:auto; }
+:root[data-layout='narrow'] .title-screen .title-menu > li:nth-child(n+3) { width:88%; }
+:root[data-layout='narrow'] :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) > .shared-hud > .hud-top { grid-template-columns:14rem 1fr auto; }
+:root[data-layout='narrow'] .combat[data-layout='formation'] > .hand-area > .combat-action-row { grid-template-columns:4rem 4.5rem minmax(0,1fr) 5rem 4rem 8rem; gap:.35rem; padding:.5rem; }
+:root[data-layout='narrow'] .shop-workspace:not(.master-workspace) { padding:30vh 1rem 1rem; }
+:root[data-layout='narrow'] .shop-workspace:not(.master-workspace) .shop-frame { width:100%; }
+:root[data-layout='narrow'] .shop-workspace:not(.master-workspace) .shop-railitem { display:none; }
+:root[data-layout='narrow'] .shop-category-select { display:block; width:100%; min-height:44px; background:#17130f; color:var(--parchment); padding:.5rem; border:1px solid var(--gold); }
+:root[data-layout='narrow'] .shop-workspace:not(.master-workspace) .shop-pane { min-height:0; flex:1 1 auto; max-height:none; }
+:root[data-layout='narrow'] .shop-workspace:not(.master-workspace) .shop-offers { min-height:10rem; }
+:root[data-layout='narrow'] .service-portrait { width:58%; height:31%; top:0; }
+@media (prefers-reduced-motion:reduce) { .shop-workspace .shop-pane { animation:none; } }
+body.reduced-motion .shop-workspace .shop-pane { animation:none; }
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) .shared-hud .hud-run-meta { display:none; }
+:root :is(.combat,main:has(>.shop-workspace),main:has(>.rest-screen)) .shared-hud .resbar { width:100% !important; }
+/* Stock tiles show artwork and price; the selected drawer gives the full rules. */
+:root .shop-workspace .shop-collectible-offer > .equipment-poker-card { height:12rem; min-height:0; aspect-ratio:auto; }
+:root .shop-workspace .shop-collectible-offer .epc-frame { position:relative; transform:none; width:100%; height:100%; padding:.4rem; grid-template-rows:1.8rem minmax(0,1fr); border-radius:2px; }
+:root .shop-workspace .shop-collectible-offer .epc-name { position:static; inset:auto; font:600 1.1rem var(--font-heading); height:auto; min-height:0; padding:.1rem; grid-row:1; }
+:root .shop-workspace .shop-collectible-offer .epc-art { grid-row:2; width:100%; height:100%; }
+:root .shop-workspace .shop-collectible-offer :is(.epc-facts,.epc-effects,.epc-tags,.epc-flavor,.epc-footer,.card-info-button,.card-more-button) { display:none; }
+:root .shop-workspace .shop-collectible-offer > .cp-body { margin-top:.2rem; }
+:root .combat[data-layout='formation'] { grid-template-rows:0 minmax(0,1fr) 35% 0; }
+:root .combat[data-layout='formation'] > .hand-area { grid-template-rows:minmax(0,1fr) 4.8rem; }
+:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] {
+ grid-template-columns:4.5rem 6rem minmax(0,1fr) 7rem 4.5rem 13rem; gap:.7rem; padding:.4rem 2rem;
+}
+:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .end-turn { grid-column:6; }
+:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .spent { grid-column:4; width:100%; }
+:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .combat-potions { grid-column:5; }
+:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .draw { grid-column:2; width:100%; }
+:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] > .energy-orb { grid-column:1; }
+:root[data-layout='narrow'] .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] { grid-template-columns:4rem 4rem minmax(0,1fr) 5rem 4rem 8rem; gap:.3rem; padding:.4rem; }
+.title-screen .title-landscape { position:absolute; inset:-1%; z-index:0; background:inherit; pointer-events:none; }
+.title-screen .title-traveler { z-index:1; }
+.title-screen .as-titlemenu { position:relative; z-index:2; }
+.title-screen .ember { z-index:1; width:.5rem; height:.5rem; }
+:root .combat .card .hold-hint { display:none; }
+:root .shop-workspace .shop-collectible-offer .epc-art img { padding:4px; }
+:root[data-layout='narrow'] .title-screen .as-titlemenu { position:static; }
+:root[data-layout='narrow'] .title-screen .tm-name { position:absolute; top:5rem; left:0; width:100%; margin:0; font-size:3.5rem; }
+:root[data-layout='narrow'] .title-screen .tm-sub { position:absolute; top:10rem; left:0; width:100%; }
+:root[data-layout='narrow'] .title-screen .as-titlemenu > .as-ornament:first-child { display:none; }
+:root[data-layout='narrow'] .title-screen .title-traveler { top:17%; height:28%; }
+:root .combat[data-layout='formation']:is(.coop,:not(.coop)) .hand { overflow:visible; scrollbar-width:none; }
+:root[data-layout='narrow'] .combat[data-layout='formation'] > .hand-area { grid-template-rows:minmax(0,1fr) calc(62px / var(--ui-zoom,1)); }
+:root[data-layout='narrow'] .combat[data-layout='formation']:is(.coop,:not(.coop)) .combat-action-row[data-footer-geometry='supported'] {
+ --combat-control-size:calc(44px / var(--ui-zoom,1)) !important;
+ grid-template-columns:calc(44px / var(--ui-zoom,1)) calc(44px / var(--ui-zoom,1)) minmax(0,1fr) calc(58px / var(--ui-zoom,1)) calc(44px / var(--ui-zoom,1)) calc(82px / var(--ui-zoom,1));
+ grid-template-rows:minmax(0,1fr); gap:calc(4px / var(--ui-zoom,1)); padding:calc(4px / var(--ui-zoom,1));
+}
+:root[data-layout='narrow'] .combat .turn-ribbon { top:25%; font-size:1.2rem; }
+:root[data-layout='narrow'] .combat .combatant-leading .intent { font-size:calc(18px / var(--ui-zoom,1)) !important; min-width:calc(56px / var(--ui-zoom,1)); }
+:root[data-layout='narrow'] .combat .combatant-leading .intent .as-glyph { display:none; }
+:root .shop-workspace .shop-collectible-offer > .equipment-poker-card { height:10rem; }
+:root .rest-screen.choice-screen { justify-content:flex-end; padding:12rem 3rem 2rem; }
+:root .rest-screen.choice-screen .rest-door { flex:0 1 48%; max-height:48%; background-color:#17130fd4; background-image:none; }
+:root .rest-screen.choice-screen .rest-door > :is(.modal-head,.modal-foot) { min-height:4.5rem; }
+:root[data-layout='narrow'] .rest-screen.choice-screen { padding:12rem 1rem 1rem; }
+:root[data-layout='narrow'] .rest-screen.choice-screen .rest-door { flex-basis:60%; max-height:60%; }
+:root[data-composition='short-wide'] .rest-screen.choice-screen { padding:2rem 1rem 1rem; }
+:root[data-composition='short-wide'] .rest-screen.choice-screen .rest-door { flex-basis:88%; max-height:88%; }

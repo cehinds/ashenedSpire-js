@@ -10,6 +10,8 @@ const BOSS_SCALE = Object.freeze({ ashheartDragon: 3 });
 export function combatSpriteRatio(stature, enemyId) {
   if (stature === 'large') return 1.75;
   if (stature === 'huge') return BOSS_SCALE[enemyId] || 2;
+  // These low-slung quadrupeds reach the human's waist in the art direction.
+  if (enemyId === 'stitchedHound') return .68;
   return 1;
 }
 

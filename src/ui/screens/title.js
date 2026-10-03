@@ -118,6 +118,9 @@ export function mountTitle(app, {
     list.className = 'title-menu';
     list.dataset.component = UI.titleMenu;
     list.setAttribute('aria-label', 'Ashen Spire main menu');
+    for (const [action, icon] of Object.entries({ history: 'history', collection: 'compendium', settings: 'settings', lan: 'coop' })) {
+      list.querySelector(`[data-title-action="${action}"]`)?.insertAdjacentHTML('afterbegin', engravedIconHtml(icon));
+    }
     // W3b: an available Continue is highlighted and its exact save sits beside
     // the menu (below it on narrow hosts); the wordmark above stays centred.
     // With no save this is W3a: the lone centred menu, no empty placeholder.
@@ -131,7 +134,7 @@ export function mountTitle(app, {
         el('span', { class: 'title-save-facts', text: slotFacts(saved.summary) }),
       ]);
       resume.replaceChildren(copy);
-      resume.insertAdjacentHTML('afterbegin', engravedIconHtml('save'));
+      resume.insertAdjacentHTML('afterbegin', engravedIconHtml('journey'));
       resume.insertAdjacentHTML('beforeend', engravedIconHtml('next'));
     }
     // These secondary doors invoke the host's existing navigation callbacks.
@@ -252,19 +255,26 @@ export function mountTitle(app, {
   function render() {
     app.innerHTML = `
       <div class="screen title-screen">
-        <img class="title-traveler" src="${assetUrl('assets/player-polish/illustrations/roadkeeper-portrait.webp')}" alt="" aria-hidden="true">
+        <div class="title-landscape" aria-hidden="true"></div>
+        <img class="title-traveler" src="${assetUrl('assets/player-polish/illustrations/title-traveler.webp')}" alt="" aria-hidden="true">
         <div class="tower-hall" aria-hidden="true"><div class="tower-interior-city"></div><div class="tower-door-frame"></div></div>
         ${Array.from({ length: 7 }, (_, i) => `<span class="ember" style="left:${8 + ((i * 13.7) % 84)}%;animation-delay:${(i * 1.7) % 9}s;animation-duration:${7 + (i % 4) * 2}s"></span>`).join('')}
         ${hudQuickSettingsHtml(hudQuickSettingsModel({ place: 'title', presentation: registries.balance.ui.hudQuickSettings, settings: meta.settings || {} }))}
         ${menuHtml()}
         ${buildStampHtml('title')}
-        <button type="button" class="tower-preview-replay">Replay entrance</button>
+        <button type="button" class="tower-preview-replay">Replay scene</button>
         ${modalHtml()}
       </div>`;
 
     wireHudQuickSettings(app, { settings: meta.settings || {}, onSettingsChange });
     const root = app.querySelector('.title-screen');
-    root.querySelector('.tower-preview-replay')?.addEventListener('click', () => onCollapse?.());
+    const replayScene = () => {
+      if (document.body.classList.contains('reduced-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      root.querySelector('.title-landscape')?.animate([{ opacity: .35, transform: 'scale(1.04)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 1400, easing: 'ease-out' });
+      root.querySelector('.title-traveler')?.animate([{ opacity: 0, transform: 'translateX(-18px)' }, { opacity: 1, transform: 'translateX(0)' }], { duration: 1000, easing: 'ease-out' });
+    };
+    root.querySelector('.tower-preview-replay')?.addEventListener('click', replayScene);
+    replayScene();
     root.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && modal) {
         event.preventDefault();

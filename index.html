@@ -29,6 +29,20 @@
 </head>
 <body>
   <main id="app" aria-live="polite"></main>
+  <script>
+    // Keep failed native development boots actionable instead of a blank scene.
+    const reportBootFailure = (message) => {
+      const app = document.getElementById('app');
+      if (app && !app.children.length) {
+        const error = document.createElement('p');
+        error.setAttribute('role', 'alert');
+        error.textContent = `Unable to open Ashen Spire: ${message}`;
+        app.append(error);
+      }
+    };
+    window.addEventListener('error', event => reportBootFailure(event.message));
+    window.addEventListener('unhandledrejection', event => reportBootFailure(event.reason?.message || String(event.reason)));
+  </script>
   <script type="module" src="src/main.js"></script>
 </body>
 </html>

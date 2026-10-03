@@ -17,7 +17,7 @@ For an external-art build (smaller HTML, art loaded alongside it):
 
 ```sh
 node tools/bundle.mjs --external-art --out build/web
-python -m http.server 4180 --directory build/web
+node tools/serve-game-preview.mjs build/web 4180
 ```
 
 Open http://localhost:4180/AshenSpire.html. The `?shot=title` preview route uses
@@ -30,8 +30,14 @@ The full-resolution runtime art is vendored in `assets/`. Its 5,410 upstream
 files were downloaded from and verified against
 [AshenSpire-art hd-assets-v3](https://github.com/cehinds/AshenSpire-art/releases/tag/hd-assets-v3),
 including the release ZIP SHA-256 and every file hash. This snapshot also keeps
-105 experimental artwork additions and the existing lightweight twins.
+106 experimental artwork additions and the existing lightweight twins.
 Original artwork credits and licenses remain in the repository.
+
+The second experimental pass rebuilds title, combat, merchant and rest
+compositions around the paintings and layers. See [design-qa.md](design-qa.md)
+for live interaction checks, screenshots, input changes and remaining artwork
+differences. The new decorative title traveler master, export hashes and prompt
+are in `art/player-polish-runtime/experimental-pass2/`.
 
 The immutable upstream manifest, release checksums and credits live under
 `art/upstream-hd-assets-v3/`. Verify the high-resolution files locally with:
