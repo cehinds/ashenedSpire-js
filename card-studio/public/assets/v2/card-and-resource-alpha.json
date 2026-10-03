@@ -1,0 +1,197 @@
+{
+  "boundsFormat": "left,top,rightExclusive,bottomExclusive",
+  "files": [
+    {
+      "file": "base-card.png",
+      "width": 1024,
+      "height": 1536,
+      "alphaBounds": [
+        0,
+        94,
+        962,
+        1520
+      ],
+      "visibleBoundsAlpha8": [
+        68,
+        101,
+        957,
+        1430
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 425314,
+      "partialAlphaPixels": 1147550,
+      "opaquePixels": 0
+    },
+    {
+      "file": "text-panel.png",
+      "width": 1774,
+      "height": 887,
+      "alphaBounds": [
+        0,
+        19,
+        1743,
+        887
+      ],
+      "visibleBoundsAlpha8": [
+        35,
+        208,
+        1739,
+        684
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 842602,
+      "partialAlphaPixels": 730657,
+      "opaquePixels": 279
+    },
+    {
+      "file": "hanging-flag.png",
+      "width": 1024,
+      "height": 1536,
+      "alphaBounds": [
+        65,
+        19,
+        946,
+        1482
+      ],
+      "visibleBoundsAlpha8": [
+        268,
+        71,
+        765,
+        1473
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 963919,
+      "partialAlphaPixels": 608945,
+      "opaquePixels": 0
+    },
+    {
+      "file": "energy.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": [
+        97,
+        53,
+        1210,
+        1214
+      ],
+      "visibleBoundsAlpha8": [
+        297,
+        128,
+        1013,
+        1133
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1381060,
+      "partialAlphaPixels": 191055,
+      "opaquePixels": 401
+    },
+    {
+      "file": "mana.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": [
+        19,
+        21,
+        1210,
+        1254
+      ],
+      "visibleBoundsAlpha8": [
+        397,
+        260,
+        855,
+        1020
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1358561,
+      "partialAlphaPixels": 213836,
+      "opaquePixels": 119
+    },
+    {
+      "file": "stamina.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": [
+        19,
+        21,
+        1210,
+        1212
+      ],
+      "visibleBoundsAlpha8": [
+        242,
+        292,
+        1017,
+        983
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1254275,
+      "partialAlphaPixels": 317775,
+      "opaquePixels": 466
+    },
+    {
+      "file": "health-flask.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": [
+        97,
+        57,
+        1210,
+        1254
+      ],
+      "visibleBoundsAlpha8": [
+        339,
+        123,
+        914,
+        1115
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1196899,
+      "partialAlphaPixels": 375315,
+      "opaquePixels": 302
+    },
+    {
+      "file": "mana-flask.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaBounds": [
+        91,
+        21,
+        1210,
+        1254
+      ],
+      "visibleBoundsAlpha8": [
+        357,
+        153,
+        897,
+        1081
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1243470,
+      "partialAlphaPixels": 328805,
+      "opaquePixels": 241
+    }
+  ]
+}

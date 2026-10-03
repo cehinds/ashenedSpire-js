@@ -66,3 +66,18 @@ Full effects and visual acceptance testing are still pending. This is a working
 experiment, not an accepted replacement for the reference artwork.
 The [upstream README](docs/UPSTREAM-README.md), [developer guide](DEVELOPER.md),
 [credits](CREDITS.md), and [license](LICENSE) are retained for reference.
+
+## Illustrated Card Studio
+
+The editable illustration tool lives in [card-studio](card-studio/README.md).
+It contains natural-shape PNG layers and separate editable text, including the
+reference resource icons and footer components. It saves portable documents;
+layouts are applied to the game only through an explicit integration change.
+
+```sh
+cd card-studio
+npm ci
+npm run dev -- --host 127.0.0.1 --port 4191
+```
+
+Open http://localhost:4191/ for the studio or /wireframe.html for its layer model.

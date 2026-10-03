@@ -1,0 +1,152 @@
+[
+  {
+    "file": "ref-frame.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "trim": [
+      0,
+      45,
+      1230,
+      1167
+    ],
+    "sha256": "af183ba06950abc425821e547e3baf29dc7ebd4bfecc867edd52fad0d17d12ab",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\frame.png"
+  },
+  {
+    "file": "ref-orb.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "trim": [
+      78,
+      2,
+      1152,
+      1226
+    ],
+    "sha256": "f31ac0a1985194c9aa76a4fda7a2b9a1c23f96f7958cb8e5af48e4af251fe991",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\orb.png"
+  },
+  {
+    "file": "ref-sigil.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "trim": [
+      25,
+      71,
+      1209,
+      1183
+    ],
+    "sha256": "3b925ecf7406691069271ad2fc719e1e6018ae28ce20ca1564d53daebe0ddc04",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\sigil.png"
+  },
+  {
+    "file": "ref-diamond.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "trim": [
+      73,
+      21,
+      1137,
+      1161
+    ],
+    "sha256": "36cda4cba048ed38b0c9cd88e6ec4ec9657336c2c5c4320577eb51caf1361e26",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\diamond.png"
+  },
+  {
+    "file": "ref-connector.png",
+    "size": [
+      2172,
+      724
+    ],
+    "trim": [
+      16,
+      103,
+      2142,
+      514
+    ],
+    "sha256": "c448a5bf32cf20d7d147cf107d88029e3e0e0ba6d3ec72fc3993181f7431e760",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\connector.png"
+  },
+  {
+    "file": "ref-draw.png",
+    "size": [
+      1243,
+      1266
+    ],
+    "trim": [
+      0,
+      53,
+      1183,
+      1213
+    ],
+    "sha256": "7e93451b1745b14269e0ded6f3583eff3976f7b0640e401297cc65e038a9c538",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\draw.png"
+  },
+  {
+    "file": "ref-plate.png",
+    "size": [
+      2172,
+      724
+    ],
+    "trim": [
+      0,
+      43,
+      2156,
+      681
+    ],
+    "sha256": "85486709f5db9417ccf6d8ca76882ea1f12fff6d86038d426bf24b6912c5eb94",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\plate.png"
+  },
+  {
+    "file": "ref-potions.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "trim": [
+      0,
+      5,
+      1493,
+      1019
+    ],
+    "sha256": "f34481fe4084e0b5f2e5f991908e16bcccfdcc94076af0aaa6416aa1eff20d0c",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\potions.png"
+  },
+  {
+    "file": "ref-spent-cards.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "trim": [
+      0,
+      0,
+      1198,
+      1254
+    ],
+    "sha256": "c2f15aa3236ba56ff55ffafbe1674a7395076a9737c7339abd19448593fafd4e",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\spent-cards.png"
+  },
+  {
+    "file": "ref-spent.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "trim": [
+      97,
+      21,
+      1117,
+      1233
+    ],
+    "sha256": "400bfb4e342e198b27d84ee71781ca4990b52ed629e425f86e1f2c29f85f9b73",
+    "source": "D:\\repos\\AshenedSpire-Editor\\public\\parts\\footer-atelier\\assets\\spent.png"
+  }
+]
